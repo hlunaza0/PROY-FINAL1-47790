@@ -8,18 +8,11 @@
 estructura como esta:
 ```bash
 # directorio: ProyectoCoder/ProyectoFinal
-drwxr-xr-x@ 8 marianobarraco  staff   256B Sep  3 09:26 ProyectoFinal  # <--- directorio principal del proyecto (nombre repetido)
--rw-r--r--@ 1 marianobarraco  staff     0B Sep  3 09:28 db.sqlite3
--rwxr-xr-x@ 1 marianobarraco  staff   669B Sep  3 09:25 manage.py
 ```
 3. Dentro de la carpeta `proyecto-final-47790/ProyectoFinal/ProyectoFinal` vamos a correr el comando `python manage.py startapp AppCoder` lo
 cual nos dejará en este estado
 ```bash
 # directorio: ProyectoCoder/ProyectoFinal
-drwxr-xr-x@ 9 marianobarraco  staff   288B Sep  3 09:31 AppCoder  # <--- nueva carpeta
-drwxr-xr-x@ 8 marianobarraco  staff   256B Sep  3 09:26 ProyectoFinal
--rw-r--r--@ 1 marianobarraco  staff     0B Sep  3 09:28 db.sqlite3
--rwxr-xr-x@ 1 marianobarraco  staff   669B Sep  3 09:25 manage.py
 ```
 4. Registrar la aplicacion en `ProyectoFinal/settings.py`
 5. Probamos que nuestro servidor web funcione correctamente, para ello vamos a correr el siguiente comando `python manage.py runserver` y comprobaeremos de 2 maneras: (i) observar la respuesta en la consola y (ii)en el browser (por ejemplo _Google Chrome_):
@@ -51,17 +44,17 @@ copiar y pegar en cualquier browser: `http://127.0.0.1:8000/` y comprobar que el
 
 1. Checkear que nuestro proyecto tenga 1 archivo `urls.py` en el directorio `ProyectoCoder/`
 2. Crear un archivo exactamente igual pero en el directorio `AppCoder`
-3. Modificar el nuevo archivo `AppCoder/urls.py` para que contenga una ruta llamada `cursos`: ```path("inicio/", inicio_view),```
-4. Crear una función para "hacerse cargo" de los pedidos en la ruta `cursos`, la llamaremos `cursos_view`
+3. Modificar el nuevo archivo `AppCoder/urls.py` para que contenga una ruta llamada `paises`: ```path("inicio/", inicio_view),```
+4. Crear una función para "hacerse cargo" de los pedidos en la ruta `paises`, la llamaremos `paises_view`
 5. Registrar las rutas definidas por el archivo `AppCoder/urls.py` en el archivo `urls.py` general del proyecto: `ProyectoCoder/urls.py`
-6. Checkear que la ruta funcione entrando a:  `http://127.0.0.1:8000/cursos`
+6. Checkear que la ruta funcione entrando a:  `http://127.0.0.1:8000/paises`
 7. Modificaremos el archivo general `urls.py` para que la ruta
 
-    `http://127.0.0.1:8000/cursos`
+    `http://127.0.0.1:8000/paises`
 
     se transforme en
 
-    `http://127.0.0.1:8000/AppCoder/cursos`
+    `http://127.0.0.1:8000/AppCoder/paises`
 
 
 # Modelos
@@ -91,7 +84,7 @@ copiar y pegar en cualquier browser: `http://127.0.0.1:8000/` y comprobar que el
 ### Funcionamiento básico de templates
 1. Crear un directorio llamado `templates` dentro del directorio `AppCoder`, luego crear otro directorio dentro de `templates` llamado `AppCoder` (sí, se repite)
 2. Crear un archivo `padre.html` en ese directorio: `ProyectoCoder/ProyectoFinal/AppCoder/templates/AppCoder/padre.html` y llenarlo con cualquier contenido
-3. Modificaremos la función `cursos_view` (desde ahora la llamaremos **vista**) que _se hace cargo_ de la ruta `AppCoder/cursos` para que entregue el contenido del archivo `padre.html`
+3. Modificaremos la función `paises_view` (desde ahora la llamaremos **vista**) que _se hace cargo_ de la ruta `AppCoder/paises` para que entregue el contenido del archivo `padre.html`
 
 **nota**: en el archivo `settings.py` hay una variable del tipo diccionario que se llama `TEMPLATES`. Esta variable contiene un par clave valor: ` "APP_DIRS": True,`
 ```python
@@ -115,9 +108,9 @@ esta es la manera de informarle a `Django` que queremos que utilice los template
 
 
 ### Herencia
-1. Vamos a crear un template llamado `cursos.html` que herede el contenido de `padre.html`
-2. Reemplazamos el template `padre.html` utilizado por `cursos_view` por `cursos.html`
-3. Agregamos en `cursos.html`
+1. Vamos a crear un template llamado `paises.html` que herede el contenido de `padre.html`
+2. Reemplazamos el template `padre.html` utilizado por `paises_view` por `paises.html`
+3. Agregamos en `paises.html`
     ```html
     {% extends "AppCoder/padre.html" %}
     ```
@@ -127,22 +120,22 @@ esta es la manera de informarle a `Django` que queremos que utilice los template
     {% endblock %}
     ```
 
-    y en `cursos.html`
+    y en `paises.html`
 
     ```html
     {% block contenidoQueCambia %}
-    Este es el contenido de cursos.html!
+    Este es el contenido de paises.html!
     {% endblock %}
     ```
 ### Templates con valores dinámicos
 
-1. Modificamos la forma en la que `cursos_view` utiliza el template:
+1. Modificamos la forma en la que `paises_view` utiliza el template:
    ```python
     return render(
         request,
-        "AppCoder/cursos.html",
+        "AppCoder/paises.html",
         {
-            "nombre": "Curso de Python",
+            "nombre": "pais de Python",
             "camadas": [1000, 1001, 1002, 1003, 1004, 1005]
         }
     )
@@ -170,8 +163,8 @@ esta es la manera de informarle a `Django` que queremos que utilice los template
 1. Correr `python manage.py migrate`
 2. Crear un Modelo en `AppCoder/models.py`
    ```python
-    class Curso(models.Model):
-        curso = models.CharField(max_length=100)
+    class pais(models.Model):
+        pais = models.CharField(max_length=100)
         camada = models.IntegerField()
     ```
 4. Corrrer sucesivamente
@@ -183,11 +176,11 @@ esta es la manera de informarle a `Django` que queremos que utilice los template
 
 ### Formularios (básicos) para crear instancias de modelos en la base de datos
 
-Idea: vamos a evolucionar la vista `cursos_view` para que pueda cumplir 2 funciones:
+Idea: vamos a evolucionar la vista `paises_view` para que pueda cumplir 2 funciones:
  * Devolver un formulario de creación de cuross
  * Crear un formulario en la base de datos.
 
-1. Crear un template `curso_formulario_basico.html` con el siguiente contenido:
+1. Crear un template `pais_formulario_basico.html` con el siguiente contenido:
    ```html
     <!DOCTYPE html>
     <html lang="en">
@@ -200,9 +193,9 @@ Idea: vamos a evolucionar la vista `cursos_view` para que pueda cumplir 2 funcio
     </head>
 
     <body style="background-color: pink;">
-        <form action="/AppCoder/cursos/" method="POST">
+        <form action="/AppCoder/paises/" method="POST">
             {% csrf_token %}
-            <p>Curso: <input type="text" name="curso"> </p>
+            <p>pais: <input type="text" name="pais"> </p>
             <p>Camada: <input type="number" name="camada"> </p>
             <input type="submit" value="Guardar">
         </form>
@@ -210,21 +203,21 @@ Idea: vamos a evolucionar la vista `cursos_view` para que pueda cumplir 2 funcio
 
     </html>
    ```
-2. Vamos a devolver este formulario mediante la vista `cursos_view` cuando el usuario pida la ruta `cursos`
-3. Vamos a modificar `curso_formulario_basico.html` para que herede del template `padre.html`
+2. Vamos a devolver este formulario mediante la vista `paises_view` cuando el usuario pida la ruta `paises`
+3. Vamos a modificar `pais_formulario_basico.html` para que herede del template `padre.html`
 4. Tener en cuenta la siguiente línea que es la que indicará a qué ruta viajará la información del formulario
    ```html
-   <form action="/AppCoder/cursos/" method="POST">
+   <form action="/AppCoder/paises/" method="POST">
     ```
-5. Modificamos la vista `cursos_view` para que distinga entre requests `GET` y `POST`
+5. Modificamos la vista `paises_view` para que distinga entre requests `GET` y `POST`
    ```python
-    def cursos_view(request):
+    def paises_view(request):
         if request.method == "GET":
             print("+" * 90) #  Imprimimos esto para ver por consola
             print("+" * 90) #  Imprimimos esto para ver por consola
             return render(
                 request,
-                "AppCoder/curso_formulario_basico.html",
+                "AppCoder/pais_formulario_basico.html",
             )
         else:
             print("*" * 90)     #  Imprimimos esto para ver por consola
@@ -232,14 +225,14 @@ Idea: vamos a evolucionar la vista `cursos_view` para que pueda cumplir 2 funcio
             print("*" * 90)     #  Imprimimos esto para ver por consola
             return render(
                 request,
-                "AppCoder/curso_formulario_basico.html",
+                "AppCoder/pais_formulario_basico.html",
             )
    ```
 6. Vamos a crear un modelo cuando el request sea del tipo `POST` mediante estas líneas:
     ```python
-    from .models import Curso
+    from .models import pais
 
-    modelo = Curso(curso=request.POST["curso"], camada=request.POST["camada"])
+    modelo = pais(pais=request.POST["pais"], camada=request.POST["camada"])
     modelo.save()
     ```
 
@@ -250,23 +243,23 @@ Idea: vamos a evolucionar la vista `cursos_view` para que pueda cumplir 2 funcio
     from django import forms
 
 
-    class CursoFormulario(forms.Form):
+    class paisFormulario(forms.Form):
 
-        curso = forms.CharField()
+        pais = forms.CharField()
         camada = forms.IntegerField()
    ```
 
-2. Creamos una copia de `curso_formulario_basico.html` con el nombre `curso_formulario_avanzado.html` y efecutamos la siguiente modificación en el nuevo archivo:
+2. Creamos una copia de `pais_formulario_basico.html` con el nombre `pais_formulario_avanzado.html` y efecutamos la siguiente modificación en el nuevo archivo:
     ```html
-    <p>Curso: <input type="text" name="curso"> </p>
+    <p>pais: <input type="text" name="pais"> </p>
     <p>Camada: <input type="number" name="camada"> </p>
     ```
     por
     ```html
     {{ form.as_p }}
     ```
-4. Editamos `cursos_view` para que utilice el nuevo template tanto para requests `GET` como para `POST`
-5. Modificamos el template `padre.html` para que tenga un link a `AppCoder/cursos` y al `inicio`.
+4. Editamos `paises_view` para que utilice el nuevo template tanto para requests `GET` como para `POST`
+5. Modificamos el template `padre.html` para que tenga un link a `AppCoder/paises` y al `inicio`.
 
 # Clase 12
 
@@ -274,20 +267,20 @@ Idea: vamos a evolucionar la vista `cursos_view` para que pueda cumplir 2 funcio
 
 1. Usar validación de Forms
 ```python
-def cursos_view(request):
+def paises_view(request):
     if request.method == "GET":
         print("+" * 90) #  Imprimimos esto para ver por consola
         print("+" * 90) #  Imprimimos esto para ver por consola
         return render(
             request,
-            "AppCoder/curso_formulario_avanzado.html",
-            {"form": CursoFormulario()}
+            "AppCoder/pais_formulario_avanzado.html",
+            {"form": paisFormulario()}
         )
     else:
-        formulario = CursoFormulario(request.POST)
+        formulario = paisFormulario(request.POST)
         if formulario.is_valid():
             informacion = formulario.cleaned_data
-            modelo = Curso(curso=informacion["curso"], camada=informacion["camada"])
+            modelo = pais(pais=informacion["pais"], camada=informacion["camada"])
             modelo.save()
         return render(
             request,
@@ -303,11 +296,11 @@ def cursos_view(request):
 
     # Register your models here.
 
-    from .models import Curso
+    from .models import pais
 
 
-    @admin.register(Curso)
-    class CursoAdmin(admin.ModelAdmin):
+    @admin.register(pais)
+    class paisAdmin(admin.ModelAdmin):
         pass
 
 ```
@@ -363,9 +356,9 @@ python manage.py migrate
 ```python
 from AppCoder.models import *
 
-cursos = Curso.objects.all()
-for curso in cursos:
-    print(curso.curso)
+paises = pais.objects.all()
+for pais in paises:
+    print(pais.pais)
 ```
 
 ### Crear (Create)
@@ -375,12 +368,12 @@ for curso in cursos:
 3. Creamos un template
 ### Leer (Read)
 
-1. Creamos una view para leer todos los cursos: `cursos_crud_read_view`:
+1. Creamos una view para leer todos los paises: `paises_crud_read_view`:
     ```python
-    def cursos_crud_read_view(request):
-        cursos = Curso.all()
+    def paises_crud_read_view(request):
+        paises = pais.all()
 
-    contexto = {"cursos": cursos}
+    contexto = {"paises": paises}
     ```
 2. Creamos un **template** y registramos la **url**
 3. **consejo**: agregar al template: `<a href="/AppCoder/profesores">Crear profesor</a>`
