@@ -261,8 +261,6 @@ Idea: vamos a evolucionar la vista `paises_view` para que pueda cumplir 2 funcio
 4. Editamos `paises_view` para que utilice el nuevo template tanto para requests `GET` como para `POST`
 5. Modificamos el template `padre.html` para que tenga un link a `AppCoder/paises` y al `inicio`.
 
-# Clase 12
-
 ## Pendiente
 
 1. Usar validación de Forms
