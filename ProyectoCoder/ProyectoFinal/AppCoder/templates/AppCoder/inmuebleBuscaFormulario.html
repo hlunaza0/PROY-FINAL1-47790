@@ -3,10 +3,11 @@
 
 
 {% block contenidoQueCambia %}
-    <body style="background-color: green;">
+    <body>
+        <h5>Búsqueda de Inmueble por nombre:</h5>
         <form action="{% url 'AppCoder:inmueble-buscar' %}" method="POST">{% csrf_token %}
-            {{ miFormulario.as_table }}
-            <input type="submit" value="Guardar">
+            {{ form.as_table }}
+            <input type="submit" value="Buscar">
         </form>
     </body>
 {% endblock %}

@@ -21,8 +21,36 @@
         <!-- Navigation-->
         <nav class="navbar navbar-light bg-light static-top">
             <div class="container">
-                <a class="navbar-brand" href="#!">Inicio</a>
-                <a class="btn btn-primary" href="#signup">Sign Up</a>
+             <!--   <a class="navbar-brand" href="AppCoder/inicio">Inicio</a> -->
+             {% if user.is_authenticated %}
+                    <a class="navbar-brand" href="{% url 'AppCoder:inicio' %}">Inicio (by name) </a>
+                    <a class="navbar-brand" href="{% url 'AppCoder:crea-pais' %}">Crear Pais (by name) </a>
+                    <a class="navbar-brand" href="{% url 'AppCoder:crea-tipoinmueble' %}">Crear Tipo Inmueble (by name) </a>
+                    <a class="navbar-brand" href="{% url 'AppCoder:crea-arrendador' %}">Crear Arrendador (by name) </a>
+                    <a class="navbar-brand" href="{% url 'AppCoder:crea-arrendatario' %}">Crear Arrendatario (by name) </a>
+                    <a class="navbar-brand" href="{% url 'AppCoder:crea-inmueble' %}">Crear Inmueble (by name) </a>
+                    <a class="navbar-brand" href="{% url 'AppCoder:Lista-inmueble' %}">Listado Inmuebles (by name) </a>
+                    <a class="navbar-brand" href="{% url 'AppCoder:inmueble-buscar' %}">Buscar Inmueble (by name) </a>
+                    <a class="navbar-brand" href="{% url 'AppCoder:lista-pais' %}">Lista Paises (by name) </a>
+
+                    <a class="navbar-brand" href="{% url 'AppCoder:pais_list' %}">Lista de paises (CBV)</a>
+                    <a class="navbar-text" href="{% url 'AppCoder:editar-perfil' %}">editar perfil: {{ user.username }}</a>
+                    <img src="{{ avatar_url }}" style="height: 40px; width: auto; border-radius: 50%; vertical-align: middle;"/>
+                    <a class="navbar-brand" href="{% url 'AppCoder:acer-auto' %}">Acerca de Mi </a>
+                    <!--<a class="navbar-text" href="{% url 'AppCoder:crear-avatar' %}">crear avatar</a> -->
+
+                    <span class="navbar-text">{{ user.username }}</span>
+                    <a class="navbar-text" href="{% url 'AppCoder:listar_usuarios' %}">Lista de Usuarios</a>
+                    <a class="navbar-text" href="{% url 'AppCoder:listar_inmuebles' %}">Lista de Inmuebles</a>
+ 
+                    <a class="navbar-brand" href="{% url 'AppCoder:logout' %}">Logout</a>
+                {% else %}
+                    <a class="navbar-brand" href="{% url 'AppCoder:login' %}">Login</a>
+                    <a class="navbar-brand" href="{% url 'AppCoder:registro' %}">Registrar usuario</a>
+                {% endif %}
+
+
+                <!--<a class="btn btn-primary" href="#signup">Sign Up</a> -->
             </div>
         </nav>
         <!-- Masthead-->
@@ -32,7 +60,7 @@
                     <div class="col-xl-6">
                         <div class="text-center text-white">
                             <!-- Page heading-->
-                            <h1 class="mb-5">Tercera Pre-Entrega Python+ Django ...!!!</h1>
+                            <h1 class="mb-5">Proyecto Final Python+ Django ...!!!</h1>
                             <!-- Signup form-->
                             <!-- * * * * * * * * * * * * * * *-->
                             <!-- * * SB Forms Contact Form * *-->

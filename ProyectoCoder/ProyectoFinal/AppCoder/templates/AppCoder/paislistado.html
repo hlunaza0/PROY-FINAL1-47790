@@ -1,0 +1,29 @@
+{% extends "AppCoder/padre.html" %}
+
+
+{% block contenidoQueCambia %}
+Aquí va listado de Paises ...!!!
+
+
+{% if pais %}
+<ul>
+    {% for paisx in pais %}
+    <li>{{ paisx.nombre }} </li>
+    <div>
+        <form action="{% url "AppCoder:elimina-pais" paisx.id %}" method="POST">{% csrf_token %}
+            <button type="submit">Eliminar</button>
+        </form>
+        
+        <button>
+            <a href="{% url 'AppCoder:editar-pais' paisx.id %}">Editar</a>  
+        </button>
+    </div>
+    {% endfor %}
+</ul> 
+{% else %}
+<H1>No existe pais en la BBDD ...!!!</H1>
+{% endif %}
+
+{% endblock %}
+  
+

@@ -2,7 +2,8 @@
 
 
 {% block contenidoQueCambia %}
-    <body style="background-color: green;">
+    <body>
+        <h5>Registro de Inmueble:</h5>
         <form action="{% url 'AppCoder:crea-inmueble' %}" method="POST">{% csrf_token %}
             {{ miFormulario.as_p }}
             <input type="submit" value="Guardar">

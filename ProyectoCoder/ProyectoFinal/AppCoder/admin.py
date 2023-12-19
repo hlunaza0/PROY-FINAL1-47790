@@ -11,4 +11,5 @@ admin.site.register(models.Arrendador)
 admin.site.register(models.Arrendatario)
 admin.site.register(models.Inmueble)
 
+admin.site.register(models.Avatar)
 

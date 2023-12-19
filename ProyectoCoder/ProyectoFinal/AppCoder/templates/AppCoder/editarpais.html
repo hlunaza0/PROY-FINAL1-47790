@@ -3,10 +3,10 @@
 
 {% block contenidoQueCambia %}
     <body style="background-color: green;">
-        <h5>Registro de Arrendatario:</h5>
-        <form action="{% url 'AppCoder:crea-arrendatario' %}" method="POST">{% csrf_token %}
+        <h5>Editar Pais:</h5>
+        <form action="{% url 'AppCoder:editar-pais' id %}" method="POST">{% csrf_token %}
             {{ miFormulario.as_p }}
-            <input type="submit" value="Guardar">
+            <input type="submit" value="Grabar">
         </form>
     </body>
 {% endblock %}

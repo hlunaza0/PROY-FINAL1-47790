@@ -1,0 +1,21 @@
+{% extends "AppCoder/padre.html" %}
+
+
+{% block contenidoQueCambia %}
+Aquí va la listado de Inmuebles o una busqueda especifica...!!!
+
+
+{% if inmueble %}
+<ul>
+    {% for inmueblex in inmueble %}
+    <li>{{ inmueblex.nombre }} {{ inmueblex.medidas }} {{ inmueblex.precio }} {{ inmueblex.direccion }} </li>
+    {% endfor %}
+</ul>
+{% else %}
+<H1>No existen inmuebles en la BBDD ...!!!</H1>
+{% endif %}
+
+
+{% endblock %}
+
+ 
